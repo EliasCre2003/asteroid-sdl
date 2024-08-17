@@ -1,0 +1,11 @@
+[package]
+name = "asteroid-sdl"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rapier2d-f64 = { version = "0.22.0", features = ["simd-stable"] }
+sdl2 = "0.37.0"
+
+[profile.dev.package."*"]
+opt-level = 3
