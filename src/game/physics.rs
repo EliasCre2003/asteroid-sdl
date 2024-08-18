@@ -3,7 +3,7 @@
 use rapier2d_f64::prelude::*;
 
 
-type ColumnVector = nalgebra::Matrix<f64, nalgebra::Const<2>, nalgebra::Const<1>, nalgebra::ArrayStorage<f64, 2, 1>>;
+pub type ColumnVector = nalgebra::Matrix<f64, nalgebra::Const<2>, nalgebra::Const<1>, nalgebra::ArrayStorage<f64, 2, 1>>;
 pub struct PhysicsSpace {
     gravity: ColumnVector,
     integration_parameters: IntegrationParameters,
@@ -73,6 +73,10 @@ impl PhysicsSpace {
 
     pub fn get_rigid_body(&self, handle: RigidBodyHandle) -> Option<&RigidBody> {
         Some(&self.rigid_body_set[handle])
+    }
+
+    pub fn add_collider(&mut self, collider: Collider) {
+        self.collider_set.insert(collider);
     }
 
 }
