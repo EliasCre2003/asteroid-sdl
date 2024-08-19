@@ -90,8 +90,7 @@ pub mod polygons {
                 center_point.x += point.x;
                 center_point.y += point.y;
             }
-            center_point /= num_sides as f64;
-            center_point
+            center_point / num_sides as f64;
         };
         points.sort_by(|a, b| {
             let p1 = a - center_point;
