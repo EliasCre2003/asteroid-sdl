@@ -1,24 +1,26 @@
 use rapier2d_f64::prelude::{ConvexPolygon, RigidBody};
 use sdl2::pixels::Color;
+use sdl2::render::Canvas;
+use sdl2::surface::Surface;
 use sdl2::{rect::Point, render::WindowCanvas};
 
 use super::objects::Asteroid;
 use super::physics::{ColumnVector, PhysicsSpace};
 
 pub trait Drawable {
-    fn draw(&mut self, canvas: &mut WindowCanvas, space: &mut PhysicsSpace) {}
+    fn draw(&mut self, canvas: &mut Canvas<Surface>, space: &mut PhysicsSpace) {}
 }
 
 
 impl Drawable for Asteroid  {
-    fn draw(&mut self, canvas: &mut WindowCanvas, space: &mut PhysicsSpace) {
+    fn draw(&mut self, canvas: &mut Canvas<Surface>, space: &mut PhysicsSpace) {
         
         let body =  space.get_rigid_body(self.get_rigid_body_handle()).unwrap();
         let position: ColumnVector = body
             .position().
             translation.
             vector;
-        let shape_points = self.get_shape().points();
+        let shape_points = self.get_shape();
         let mut draw_points: Vec<Point> = Vec::with_capacity(shape_points.len());
         let angle = body.rotation().angle();
         for shape_point in shape_points {
